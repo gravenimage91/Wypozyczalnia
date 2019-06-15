@@ -12,6 +12,21 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,22 +61,81 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainWindowForm.cs">
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Rent.cs" />
+    <Compile Include="Presenters\RentCarPresenter.cs" />
+    <Compile Include="Presenters\ReturnCarPresenter.cs" />
+    <Compile Include="Presenters\SearchCarPresenter.cs" />
+    <Compile Include="Views\AddNewCarForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindowForm.Designer.cs">
+    <Compile Include="Views\AddNewCarForm.Designer.cs">
+      <DependentUpon>AddNewCarForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers.cs" />
+    <Compile Include="Views\IRentCar.cs" />
+    <Compile Include="Views\IReturnCar.cs" />
+    <Compile Include="Views\IShowCars.cs" />
+    <Compile Include="Views\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWindowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MainWindowForm.Designer.cs">
       <DependentUpon>MainWindowForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Car.cs" />
+    <Compile Include="Models\LoginCredentials.cs" />
+    <Compile Include="Models\Modification.cs" />
+    <Compile Include="Views\ModifyCarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ModifyCarForm.Designer.cs">
+      <DependentUpon>ModifyCarForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\AddCarPresenter.cs" />
+    <Compile Include="Presenters\LoginPresenter.cs" />
+    <Compile Include="Presenters\ModifyCarPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchCarForm.cs">
+    <Compile Include="Views\IAddCar.cs" />
+    <Compile Include="Views\ILogin.cs" />
+    <Compile Include="Views\IModifyCar.cs" />
+    <Compile Include="Views\RentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SearchCarForm.Designer.cs">
-      <DependentUpon>SearchCarForm.cs</DependentUpon>
+    <Compile Include="Views\RentForm.Designer.cs">
+      <DependentUpon>RentForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="MainWindowForm.resx">
+    <Compile Include="Views\ReturnCarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ReturnCarForm.Designer.cs">
+      <DependentUpon>ReturnCarForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WypozyczalniaDataSet.cs">
+      <DependentUpon>WypozyczalniaDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="WypozyczalniaDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WypozyczalniaDataSet.xsd</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\AddNewCarForm.resx">
+      <DependentUpon>AddNewCarForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MainWindowForm.resx">
       <DependentUpon>MainWindowForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ModifyCarForm.resx">
+      <DependentUpon>ModifyCarForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -72,8 +146,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="SearchCarForm.resx">
-      <DependentUpon>SearchCarForm.cs</DependentUpon>
+    <EmbeddedResource Include="Views\RentForm.resx">
+      <DependentUpon>RentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ReturnCarForm.resx">
+      <DependentUpon>ReturnCarForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -84,9 +161,36 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="WypozyczalniaDataSet.xsc">
+      <DependentUpon>WypozyczalniaDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="WypozyczalniaDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WypozyczalniaDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="WypozyczalniaDataSet.xss">
+      <DependentUpon>WypozyczalniaDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
