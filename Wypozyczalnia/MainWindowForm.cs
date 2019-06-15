@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace Wypozyczalnia
 {
-    public partial class Form1 : Form
+    public partial class RentACar : Form
     {
-        public Form1()
+        public RentACar()
         {
             InitializeComponent();
+        }
+
+        private void showCarsButton_Click(object sender, EventArgs e)
+        {
+            Form searchForm = new SearchCarForm();
+            searchForm.ShowDialog();
         }
     }
 }
