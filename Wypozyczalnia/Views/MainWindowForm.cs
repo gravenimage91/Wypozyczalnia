@@ -25,7 +25,7 @@ namespace Wypozyczalnia
 
         public CheckedListBox.CheckedItemCollection EngineText => engineCheckedListBox.CheckedItems;
 
-        public string GearboxText => gearboxRadioButton1.Checked ? gearboxRadioButton1.Text : (gearboxRadioButton2.Checked ? gearboxRadioButton2.Text : ($"('{gearboxRadioButton1.Text}', '{gearboxRadioButton2.Text}')"));
+        public string GearboxText => gearboxRadioButton1.Checked ? "('" + gearboxRadioButton1.Text + "')" : (gearboxRadioButton2.Checked ? "('" + gearboxRadioButton2.Text + "')" : ($"('{gearboxRadioButton1.Text}', '{gearboxRadioButton2.Text}')"));
 
         public CheckedListBox.CheckedItemCollection ManufacturerText => manufacturerCheckedListBox.CheckedItems;
 
@@ -148,14 +148,20 @@ namespace Wypozyczalnia
         private void ShowRentCarForm(object sender, DataGridViewCellEventArgs e)
         {
             Form rentCarForm = new RentForm(sender, e);
-            rentCarForm. ShowDialog();
+            rentCarForm.ShowDialog();
 
         }
 
-        private void odbierzSamochodToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OdbierzSamochodToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form returnCarForm = new ReturnCarForm();
             returnCarForm.ShowDialog();
+        }
+
+        private void usunSamochodToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form deleteCarForm = new DeleteCarForm();
+            deleteCarForm.ShowDialog();
         }
     }
 }
